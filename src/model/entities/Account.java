@@ -41,16 +41,21 @@ public class Account {
     }
 
     public void withdraw(double amount){
+        withdrawValidation(amount);
+        balance -= amount;
+    }
+
+    public void withdrawValidation(double amount){
         if (balance <= 0){
             throw new DomainException("no money in the account");
-        }
-        if (amount > balance){
-            throw new DomainException("Not enough balance");
         }
         if (amount > withdrawLimit){
             throw new DomainException("The amount exceeds withdraw limit");
         }
-        balance -= amount;
+        if (amount > balance){
+            throw new DomainException("Not enough balance");
+        }
+        
     }
 
 }
